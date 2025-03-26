@@ -2,375 +2,298 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>FREE SEXTOYS - Accueil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Sextoys - Sélection</title>
     <style>
         body {
-            background: linear-gradient(135deg, #1A2526 0%, #2C3E50 100%);
-            color: #FFFFFF;
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #1a2a44;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        nav {
-            background: #131921;
-            padding: 15px;
+        .header {
+            width: 100%;
+            max-width: 1200px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
         }
-        nav h1 {
-            color: #FF6200;
+        .header h1 {
+            color: #ff0000;
+            font-size: 24px;
+            font-weight: bold;
             margin: 0;
-            font-size: 28px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
-        nav select {
-            padding: 8px;
-            background: #FF6200;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        nav select:hover {
-            background: #E55A00;
-        }
-        .cart-icon {
-            position: relative;
+        .header-right {
             display: flex;
             align-items: center;
-            cursor: pointer;
+            gap: 15px;
         }
-        .cart-icon img {
-            width: 30px;
-            height: 30px;
-            filter: invert(100%);
+        .cart {
+            position: relative;
+            font-size: 24px;
+            color: #fff;
         }
         .cart-count {
             position: absolute;
             top: -10px;
             right: -10px;
-            background: #FF6200;
-            color: #FFFFFF;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            line-height: 20px;
-            text-align: center;
+            background-color: #ff6200;
+            color: #fff;
             font-size: 12px;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        .progress {
-            text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 25px;
-            margin: 10px 0;
-        }
-        .progress span {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
             border-radius: 50%;
-            margin: 0 15px;
-            background: #FF6200;
-            color: #FFFFFF;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            padding: 2px 6px;
         }
-        .progress span.inactive {
-            background: #666;
-            transform: scale(0.8);
+        .language-select {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            font-size: 14px;
+            color: #111;
+        }
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .step {
+            width: 30px;
+            height: 30px;
+            background-color: #4a5b7c;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .step.active {
+            background-color: #ff6200;
         }
         .container {
-            padding: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        #articles {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 20px;
         }
-        .article {
-            background: #FFFFFF;
-            padding: 20px;
+        .item {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
             text-align: center;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .article:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        .article img {
-            width: 160px;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 10px;
+        .item img {
+            max-width: 100%;
+            height: auto;
             margin-bottom: 10px;
         }
-        .article p {
-            margin: 10px 0;
-            font-size: 16px;
-            color: #0F1111;
-            font-weight: 500;
+        .item p {
+            margin: 0 0 10px;
+            font-size: 14px;
+            color: #111;
         }
-        .article button {
-            background: #FF6200;
-            border: none;
-            padding: 12px;
-            color: #FFFFFF;
+        .item button {
             width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 25px;
-            transition: background 0.3s ease, transform 0.2s ease;
+            margin-top: 5px;
         }
-        .article button:hover {
-            background: #E55A00;
-            transform: scale(1.05);
-            box-shadow: 0 0 10px #FF6200;
+        .item button.added {
+            background-color: #ccc;
+            color: #fff;
         }
-        .article button.added {
-            background: #666;
-            cursor: not-allowed;
+        .item button.add-to-cart {
+            background-color: #ff6200;
+            color: #fff;
         }
-        #selected-items {
-            margin-top: 40px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        .selected-items {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 1200px;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        #selected-items h2 {
-            color: #FF6200;
-            font-size: 22px;
-            margin-bottom: 20px;
-            text-align: center;
+        .selected-items h2 {
+            color: #ff6200;
+            font-size: 18px;
+            margin: 0 0 10px;
         }
         .selected-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #FFFFFF;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            animation: slideIn 0.3s ease;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
         }
-        .selected-item p {
-            margin: 0;
-            color: #0F1111;
-            font-size: 16px;
-        }
-        .selected-item button {
-            background: #FF4444;
-            padding: 8px 15px;
+        .selected-item span {
+            color: #111;
             font-size: 14px;
         }
-        .selected-item button:hover {
-            background: #E03333;
-            transform: scale(1.05);
-            box-shadow: 0 0 10px #FF4444;
-        }
-        #nextBtn {
-            display: none;
-            margin: 30px auto;
-            background: #FF6200;
+        .selected-item button {
+            background-color: #ff0000;
+            color: #fff;
             border: none;
-            padding: 15px 40px;
-            color: #FFFFFF;
+            padding: 5px 10px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 18px;
-            border-radius: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-        #nextBtn:hover {
-            background: #E55A00;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #FF6200;
-        }
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
     </style>
 </head>
 <body>
-    <nav>
+    <div class="header">
         <h1>FREE SEXTOYS</h1>
-        <div class="cart-icon">
-            <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart Icon">
-            <span class="cart-count" id="cartCount">0</span>
+        <div class="header-right">
+            <div class="cart">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+            <select class="language-select">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+            </select>
         </div>
-        <select id="languageSelect" onchange="changeLanguage(this.value)">
-            <option value="fr">Français</option>
-            <option value="en">English</option>
-            <option value="de">Deutsch</option>
-        </select>
-    </nav>
-    <div class="progress">
-        <span>1</span><span class="inactive">2</span><span class="inactive">3</span><span class="inactive">4</span><span class="inactive">5</span>
+    </div>
+    <div class="steps">
+        <div class="step active">1</div>
+        <div class="step">2</div>
+        <div class="step">3</div>
+        <div class="step">4</div>
+        <div class="step">5</div>
     </div>
     <div class="container">
-        <div id="articles">
-            <div class="article"><img src="sextoy1.jpg" alt="Sextoy 1"><p>Sextoy 1 - 0,00 €</p><button onclick="addItem('Sextoy 1', this)">Ajouter au panier</button></div>
-            <div class="article"><img src="sextoy2.jpg" alt="Sextoy 2"><p>Sextoy 2 - 0,00 €</p><button onclick="addItem('Sextoy 2', this)">Ajouter au panier</button></div>
-            <div class="article"><img src="sextoy3.jpg" alt="Sextoy 3"><p>Sextoy 3 - 0,00 €</p><button onclick="addItem('Sextoy 3', this)">Ajouter au panier</button></div>
-            <div class="article"><img src="sextoy4.jpg" alt="Sextoy 4"><p>Sextoy 4 - 0,00 €</p><button onclick="addItem('Sextoy 4', this)">Ajouter au panier</button></div>
-            <div class="article"><img src="sextoy5.jpg" alt="Sextoy 5"><p>Sextoy 5 - 0,00 €</p><button onclick="addItem('Sextoy 5', this)">Ajouter au panier</button></div>
-            <div class="article"><img src="sextoy6.jpg" alt="Sextoy 6"><p>Sextoy 6 - 0,00 €</p><button onclick="addItem('Sextoy 6', this)">Ajouter au panier</button></div>
-            <div class="article"><img src="sextoy7.jpg" alt="Sextoy 7"><p>Sextoy 7 - 0,00 €</p><button onclick="addItem('Sextoy 7', this)">Ajouter au panier</button></div>
-            <div class="article"><img src="sextoy8.jpg" alt="Sextoy 8"><p>Sextoy 8 - 0,00 €</p><button onclick="addItem('Sextoy 8', this)">Ajouter au panier</button></div>
+        <div class="item">
+            <img src="https://i.imgur.com/nyjKHpc.jpg" alt="Sextoy 1">
+            <p>Sextoy 1 - 0.00 €</p>
+            <button class="add-to-cart" onclick="addToCart('Sextoy 1', this)">Add to Cart</button>
         </div>
-        <div id="selected-items">
-            <h2 id="selectedTitle">Articles sélectionnés</h2>
-            <div id="selectedList"></div>
+        <div class="item">
+            <img src="https://i.imgur.com/swIz7SZ.jpg" alt="Sextoy 2">
+            <p>Sextoy 2 - 0.00 €</p>
+            <button class="add-to-cart" onclick="addToCart('Sextoy 2', this)">Add to Cart</button>
         </div>
-        <button id="nextBtn" onclick="goToNextPage()">Suivant</button>
+        <div class="item">
+            <img src="https://i.imgur.com/hwtV7x8.jpg" alt="Sextoy 3">
+            <p>Sextoy 3 - 0.00 €</p>
+            <button class="add-to-cart" onclick="addToCart('Sextoy 3', this)">Add to Cart</button>
+        </div>
+        <div class="item">
+            <img src="https://i.imgur.com/UfnLezv.jpg" alt="Sextoy 4">
+            <p>Sextoy 4 - 0.00 €</p>
+            <button class="add-to-cart" onclick="addToCart('Sextoy 4', this)">Add to Cart</button>
+        </div>
+        <div class="item">
+            <img src="https://i.imgur.com/NoeaZj5.jpg" alt="Sextoy 5">
+            <p>Sextoy 5 - 0.00 €</p>
+            <button class="add-to-cart" onclick="addToCart('Sextoy 5', this)">Add to Cart</button>
+        </div>
+        <div class="item">
+            <img src="https://i.imgur.com/iLXx5yF.jpg" alt="Sextoy 6">
+            <p>Sextoy 6 - 0.00 €</p>
+            <button class="add-to-cart" onclick="addToCart('Sextoy 6', this)">Add to Cart</button>
+        </div>
+        <div class="item">
+            <img src="https://i.imgur.com/d1ysdpP.jpg" alt="Sextoy 7">
+            <p>Sextoy 7 - 0.00 €</p>
+            <button class="add-to-cart" onclick="addToCart('Sextoy 7', this)">Add to Cart</button>
+        </div>
+        <div class="item">
+            <img src="https://i.imgur.com/MnM6tp6.jpg" alt="Sextoy 8">
+            <p>Sextoy 8 - 0.00 €</p>
+            <button class="add-to-cart" onclick="addToCart('Sextoy 8', this)">Add to Cart</button>
+        </div>
+    </div>
+    <div class="selected-items" id="selectedItems">
+        <h2>Selected Items</h2>
+        <!-- Les éléments sélectionnés seront ajoutés ici dynamiquement -->
     </div>
 
     <script>
-        let selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
-        let lang = 'fr'; // Variable globale pour la langue
+        let selectedItems = [];
 
-        fetch('https://ipapi.co/json/')
-            .then(response => response.json())
-            .then(data => {
-                const country = data.country_code;
-                lang = 'en';
-                if (country === 'FR') lang = 'fr';
-                if (country === 'DE') lang = 'de';
-                changeLanguage(lang);
-                document.getElementById('languageSelect').value = lang;
-            })
-            .catch(error => {
-                console.error('Erreur lors de la détection de langue :', error);
-                changeLanguage('en');
-            });
-
-        function changeLanguage(language) {
-            lang = language;
-            const buttons = document.querySelectorAll('.article button');
-            const nextBtn = document.getElementById('nextBtn');
-            const selectedTitle = document.getElementById('selectedTitle');
-            if (lang === 'fr') {
-                buttons.forEach(btn => {
-                    if (!btn.classList.contains('added')) {
-                        btn.textContent = 'Ajouter au panier';
-                    }
-                });
-                nextBtn.textContent = 'Suivant';
-                selectedTitle.textContent = 'Articles sélectionnés';
-            } else if (lang === 'en') {
-                buttons.forEach(btn => {
-                    if (!btn.classList.contains('added')) {
-                        btn.textContent = 'Add to Cart';
-                    }
-                });
-                nextBtn.textContent = 'Next';
-                selectedTitle.textContent = 'Selected Items';
-            } else if (lang === 'de') {
-                buttons.forEach(btn => {
-                    if (!btn.classList.contains('added')) {
-                        btn.textContent = 'In den Warenkorb';
-                    }
-                });
-                nextBtn.textContent = 'Weiter';
-                selectedTitle.textContent = 'Ausgewählte Artikel';
-            }
-            updateSelectedItems();
-        }
-
-        function addItem(item, button) {
+        function addToCart(item, button) {
             if (!selectedItems.includes(item)) {
                 selectedItems.push(item);
-                localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-                button.textContent = lang === 'fr' ? 'Ajouté' : lang === 'en' ? 'Added' : 'Hinzugefügt';
-                button.classList.add('added');
+                button.textContent = "Ajouté";
+                button.classList.remove("add-to-cart");
+                button.classList.add("added");
+                button.disabled = true;
                 updateSelectedItems();
                 updateCartCount();
-                document.getElementById('nextBtn').style.display = selectedItems.length > 0 ? 'block' : 'none';
             }
         }
 
         function removeItem(item) {
             selectedItems = selectedItems.filter(i => i !== item);
-            localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-            const button = Array.from(document.querySelectorAll('.article button')).find(btn => btn.parentElement.querySelector('p').textContent.includes(item));
+            const button = document.querySelector(`button[onclick="addToCart('${item}', this)"]`);
             if (button) {
-                button.textContent = lang === 'fr' ? 'Ajouter au panier' : lang === 'en' ? 'Add to Cart' : 'In den Warenkorb';
-                button.classList.remove('added');
+                button.textContent = "Add to Cart";
+                button.classList.remove("added");
+                button.classList.add("add-to-cart");
+                button.disabled = false;
             }
             updateSelectedItems();
             updateCartCount();
-            document.getElementById('nextBtn').style.display = selectedItems.length > 0 ? 'block' : 'none';
         }
 
         function updateSelectedItems() {
-            const selectedList = document.getElementById('selectedList');
-            selectedList.innerHTML = '';
-            selectedItems.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'selected-item';
-                div.innerHTML = `
-                    <p>${item}</p>
-                    <button onclick="removeItem('${item}')">${lang === 'fr' ? 'Retirer' : lang === 'en' ? 'Remove' : 'Entfernen'}</button>
-                `;
-                selectedList.appendChild(div);
-            });
-        }
-
-        function updateCartCount() {
-            const cartCount = document.getElementById('cartCount');
-            cartCount.textContent = selectedItems.length;
-        }
-
-        function goToNextPage() {
-            try {
-                // Vérifier que des articles sont sélectionnés avant de passer à la page suivante
-                if (selectedItems.length === 0) {
-                    alert(lang === 'fr' ? 'Veuillez sélectionner au moins un article.' : lang === 'en' ? 'Please select at least one item.' : 'Bitte wählen Sie mindestens einen Artikel aus.');
-                    return;
-                }
-                localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-                window.location.href = 'infos.html';
-            } catch (error) {
-                console.error('Erreur lors de la redirection :', error);
-                alert('Erreur lors de la redirection. Vérifiez que infos.html existe dans le même dossier.');
+            const selectedItemsDiv = document.getElementById('selectedItems');
+            selectedItemsDiv.innerHTML = '<h2>Selected Items</h2>';
+            if (selectedItems.length === 0) {
+                selectedItemsDiv.innerHTML += '<p>Aucun article sélectionné.</p>';
+            } else {
+                selectedItems.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'selected-item';
+                    div.innerHTML = `
+                        <span>${item}</span>
+                        <button onclick="removeItem('${item}')">Remove</button>
+                    `;
+                    selectedItemsDiv.appendChild(div);
+                });
+                const nextButton = document.createElement('button');
+                nextButton.textContent = 'Next';
+                nextButton.className = 'add-to-cart';
+                nextButton.style.marginTop = '10px';
+                nextButton.style.width = '100px';
+                nextButton.onclick = saveSelection;
+                selectedItemsDiv.appendChild(nextButton);
             }
         }
 
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = selectedItems.length;
+        }
+
+        function saveSelection() {
+            if (selectedItems.length === 0) {
+                alert("Veuillez sélectionner au moins un sextoy.");
+                return;
+            }
+            localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+            window.location.href = 'infos.html';
+        }
+
         // Initialisation
-        document.addEventListener('DOMContentLoaded', () => {
-            updateSelectedItems();
-            updateCartCount();
-            document.getElementById('nextBtn').style.display = selectedItems.length > 0 ? 'block' : 'none';
-            document.querySelectorAll('.article button').forEach(button => {
-                const item = button.parentElement.querySelector('p').textContent.split(' - ')[0];
-                if (selectedItems.includes(item)) {
-                    button.textContent = lang === 'fr' ? 'Ajouté' : lang === 'en' ? 'Added' : 'Hinzugefügt';
-                    button.classList.add('added');
-                }
-            });
-        });
+        updateSelectedItems();
+        updateCartCount();
     </script>
 </body>
 </html>
